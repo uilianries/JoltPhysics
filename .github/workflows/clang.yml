@@ -20,3 +20,18 @@ jobs:
       run: cmake -S ${{github.workspace}}/Build -B ${{github.workspace}}/Build/MacOS -DCMAKE_CXX_COMPILER=/Applications/Xcode_14.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=ON -DTARGET_UNIT_TESTS=OFF -DTARGET_HELLO_WORLD=OFF -DTARGET_PERFORMANCE_TEST=OFF -DTARGET_SAMPLES=OFF -DTARGET_VIEWER=OFF -DCROSS_PLATFORM_DETERMINISTIC=OFF -DINTERPROCEDURAL_OPTIMIZATION=OFF -DGENERATE_DEBUG_SYMBOLS=OFF -DENABLE_ALL_WARNINGS=OFF -DOVERRIDE_CXX_FLAGS=OFF -DDEBUG_RENDERER_IN_DEBUG_AND_RELEASE=OFF -DPROFILER_IN_DEBUG_AND_RELEASE=OFF
     - name: Build
       run: cmake --build ${{github.workspace}}/Build/MacOS
+
+  linux-clang-12:
+    runs-on: ubuntu-latest
+    container:
+      image: conanio/clang12-ubuntu16.04:1.63.0
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    - name: Update CMake
+      run: pip install cmake
+    - name: Configure CMake
+      run: python -m cmake -S ${{github.workspace}}/Build -B ${{github.workspace}}/Build/MacOS -DCMAKE_CXX_COMPILER=/Applications/Xcode_14.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=ON -DTARGET_UNIT_TESTS=OFF -DTARGET_HELLO_WORLD=OFF -DTARGET_PERFORMANCE_TEST=OFF -DTARGET_SAMPLES=OFF -DTARGET_VIEWER=OFF -DCROSS_PLATFORM_DETERMINISTIC=OFF -DINTERPROCEDURAL_OPTIMIZATION=OFF -DGENERATE_DEBUG_SYMBOLS=OFF -DENABLE_ALL_WARNINGS=OFF -DOVERRIDE_CXX_FLAGS=OFF -DDEBUG_RENDERER_IN_DEBUG_AND_RELEASE=OFF -DPROFILER_IN_DEBUG_AND_RELEASE=OFF
+    - name: Build
+      run: python -m cmake --build ${{github.workspace}}/Build/MacOS
