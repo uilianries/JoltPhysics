@@ -20,6 +20,8 @@ jobs:
       run: cmake -S ${{github.workspace}}/Build -B ${{github.workspace}}/Build/MacOS \
               -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_VERBOSE_MAKEFILE=ON \
+              -DCMAKE_CXX_STANDARD=17 \
+              -DCMAKE_OSX_SYSROOT=macosx13.0 \
               -DTARGET_UNIT_TESTS=OFF \
               -DTARGET_HELLO_WORLD=OFF \
               -DTARGET_PERFORMANCE_TEST=OFF \
