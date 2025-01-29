@@ -9,28 +9,14 @@ on:
       - '**.md'
 
 jobs:
-  macos-13-clang-15:
+  macos-13-clang-14:
     runs-on: macos-13
-    name: macOS Clang 15
+    name: macOS Clang 14
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
     - name: Configure CMake
-      run: cmake -S ${{github.workspace}}/Build -B ${{github.workspace}}/Build/MacOS -DCMAKE_CXX_COMPILER=/Applications/Xcode_14.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_STANDARD=17 -DTARGET_UNIT_TESTS=OFF -DTARGET_HELLO_WORLD=OFF -DTARGET_PERFORMANCE_TEST=OFF -DTARGET_SAMPLES=OFF -DTARGET_VIEWER=OFF -DCROSS_PLATFORM_DETERMINISTIC=OFF -DINTERPROCEDURAL_OPTIMIZATION=OFF -DGENERATE_DEBUG_SYMBOLS=OFF -DENABLE_ALL_WARNINGS=OFF -DOVERRIDE_CXX_FLAGS=OFF -DDEBUG_RENDERER_IN_DEBUG_AND_RELEASE=OFF -DPROFILER_IN_DEBUG_AND_RELEASE=OFF
-    - name: Build
-      run: cmake --build ${{github.workspace}}/Build/MacOS
-
-  macos-13-clang-13:
-    runs-on: macos-13
-    name: macOS Clang 13
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-    - name: Install Clang 13
-      run: brew install llvm@13
-    - name: Configure CMake
-      run: cmake -S ${{github.workspace}}/Build -B ${{github.workspace}}/Build/MacOS -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_STANDARD=17 -DTARGET_UNIT_TESTS=OFF -DTARGET_HELLO_WORLD=OFF -DTARGET_PERFORMANCE_TEST=OFF -DTARGET_SAMPLES=OFF -DTARGET_VIEWER=OFF -DCROSS_PLATFORM_DETERMINISTIC=OFF -DINTERPROCEDURAL_OPTIMIZATION=OFF -DGENERATE_DEBUG_SYMBOLS=OFF -DENABLE_ALL_WARNINGS=OFF -DOVERRIDE_CXX_FLAGS=OFF -DDEBUG_RENDERER_IN_DEBUG_AND_RELEASE=OFF -DPROFILER_IN_DEBUG_AND_RELEASE=OFF -DCMAKE_CXX_COMPILER=/usr/local/opt/llvm@13/bin/clang++ -DCMAKE_C_COMPILER=/usr/local/opt/llvm@13/bin/clang
+      run: cmake -S ${{github.workspace}}/Build -B ${{github.workspace}}/Build/MacOS -DCMAKE_CXX_COMPILER=/Applications/Xcode_14.1.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -DCMAKE_BUILD_TYPE=Release -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_CXX_STANDARD=17 -DBUILD_SHARED_LIBS=ON -DTARGET_UNIT_TESTS=OFF -DTARGET_HELLO_WORLD=OFF -DTARGET_PERFORMANCE_TEST=OFF -DTARGET_SAMPLES=OFF -DTARGET_VIEWER=OFF -DCROSS_PLATFORM_DETERMINISTIC=OFF -DINTERPROCEDURAL_OPTIMIZATION=OFF -DGENERATE_DEBUG_SYMBOLS=OFF -DENABLE_ALL_WARNINGS=OFF -DOVERRIDE_CXX_FLAGS=OFF -DDEBUG_RENDERER_IN_DEBUG_AND_RELEASE=OFF -DPROFILER_IN_DEBUG_AND_RELEASE=OFF
     - name: Build
       run: cmake --build ${{github.workspace}}/Build/MacOS
