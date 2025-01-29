@@ -22,7 +22,7 @@ jobs:
       run: cmake --build ${{github.workspace}}/Build/Clang14
 
   linux-clang-13:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
