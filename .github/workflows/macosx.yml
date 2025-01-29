@@ -2,12 +2,8 @@ name: Validate MacOSX Clang13 case
 
 on:
   push:
-    branches: [ master ]
-    paths-ignore:
-      - 'Docs/**'
-      - '**.md'
-  pull_request:
-    branches: [ master ]
+    branches: [ release/5.2.0/ci ]
+
     paths-ignore:
       - 'Docs/**'
       - '**.md'
